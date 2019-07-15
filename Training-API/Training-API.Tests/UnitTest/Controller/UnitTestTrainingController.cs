@@ -64,5 +64,70 @@ namespace Training_API.Tests.UnitTest.Controller
             Assert.AreEqual<int>(1, msg.MemberNames.Count(), "Unexpected number of validation errors.");
             Assert.AreEqual<string>("TrainingName", msg.MemberNames.ElementAt(0));
         }
+
+        [TestMethod]
+        public void Validate_StartDate_Required_Test()
+        {
+            CreateInstance();
+            Training t = new Training
+            {
+                TrainingName = "Dotnet",
+                EndDate = Convert.ToDateTime("2019/01/20")
+            };
+
+            var validationResults = new List<ValidationResult>();
+            var actual = Validator.TryValidateObject(t, new ValidationContext(t), validationResults, true);
+
+            //Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual<int>(1, validationResults.Count, "Unexpected number of validation errors.");
+            var msg = validationResults[0];
+            Assert.AreEqual<string>(ErrorMessageConstants.StartDateRequired, msg.ErrorMessage);
+            Assert.AreEqual<int>(1, msg.MemberNames.Count(), "Unexpected number of validation errors.");
+            Assert.AreEqual<string>("StartDate", msg.MemberNames.ElementAt(0));
+        }
+
+        [TestMethod]
+        public void Validate_EndDate_Required_Test()
+        {
+            CreateInstance();
+            Training t = new Training
+            {
+                TrainingName = "Dotnet",
+                StartDate = Convert.ToDateTime("2019/01/10")
+            };
+
+            var validationResults = new List<ValidationResult>();
+            var actual = Validator.TryValidateObject(t, new ValidationContext(t), validationResults, true);
+
+            //Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual<int>(1, validationResults.Count, "Unexpected number of validation errors.");
+            var msg = validationResults[0];
+            Assert.AreEqual<string>(ErrorMessageConstants.EndDateRequired, msg.ErrorMessage);
+            Assert.AreEqual<int>(1, msg.MemberNames.Count(), "Unexpected number of validation errors.");
+            Assert.AreEqual<string>("EndDate", msg.MemberNames.ElementAt(0));
+        }
+
+        [TestMethod]
+        public void Validate_DateCompare_Invalid_Test()
+        {
+            CreateInstance();
+            Training t = new Training
+            {
+                TrainingName = "Dotnet",
+                StartDate = Convert.ToDateTime("2019/01/10"),
+                EndDate = Convert.ToDateTime("2018/01/09")
+            };
+
+            var validationResults = new List<ValidationResult>();
+            var actual = Validator.TryValidateObject(t, new ValidationContext(t), validationResults, true);
+
+            //Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual<int>(1, validationResults.Count, "Unexpected number of validation errors.");
+            var msg = validationResults[0];
+            Assert.AreEqual<string>(ErrorMessageConstants.DateCompareInvalid, msg.ErrorMessage);
+        }
     }
 }
