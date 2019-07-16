@@ -3,6 +3,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { TrainingComponent } from './training.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { TrainingService } from './service/training.service';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('TrainingComponent', () => {
   let component: TrainingComponent;
@@ -14,7 +17,8 @@ describe('TrainingComponent', () => {
       schemas: [
         CUSTOM_ELEMENTS_SCHEMA
       ],
-      imports: [BsDatepickerModule.forRoot()],
+      imports: [BsDatepickerModule.forRoot(), HttpClientModule,ReactiveFormsModule,],
+      providers: [TrainingService]
     })
     .compileComponents();
   }));
