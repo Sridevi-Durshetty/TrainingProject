@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using Training_API.DB;
 using Training_API.Filters;
 using Training_API.Models;
@@ -14,6 +15,7 @@ namespace Training_API.Controllers
 {
     [ValidateModel]
     [RoutePrefix("api/training")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class TrainingController : ApiController
     {
         TrainingRepository objTrainingRepo = new TrainingRepository();
