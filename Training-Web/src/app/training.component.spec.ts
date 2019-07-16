@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TrainingComponent } from './training.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 describe('TrainingComponent', () => {
   let component: TrainingComponent;
@@ -13,6 +14,7 @@ describe('TrainingComponent', () => {
       schemas: [
         CUSTOM_ELEMENTS_SCHEMA
       ],
+      imports: [BsDatepickerModule.forRoot()],
     })
     .compileComponents();
   }));
