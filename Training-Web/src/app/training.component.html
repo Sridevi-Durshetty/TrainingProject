@@ -30,8 +30,13 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="endDate">End Date</label>
                 <div class="col-sm-8">
-                    <input type="text" bsDatepicker  class="form-control" 
-                    [bsConfig]= "datePickerConfig"> 
+                        <input type="text" bsDatepicker  class="form-control" formControlName="EndDate"
+                        [bsConfig]= "datePickerConfig"
+                        [class.is-invalid]="formErrors.EndDate || formErrors.DateGroup" (blur)="logValidationErrors()">
+                      
+                        <small class="text-danger" *ngIf="formErrors.EndDate || formErrors.DateGroup">
+                            {{formErrors.EndDate ?  formErrors.EndDate : formErrors.DateGroup}}
+                        </small>
                 </div>
             </div>
         </div>
