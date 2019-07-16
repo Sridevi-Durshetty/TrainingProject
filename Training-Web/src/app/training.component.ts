@@ -103,10 +103,16 @@ export class TrainingComponent implements OnInit {
     
     const ctrl= this.trainingFG.value.DateGroup
     const stDate = moment(ctrl.StartDate).format('YYYY/MM/DD');
-   
+    const enDate = moment(ctrl.EndDate).format('YYYY/MM/DD');   
 
-     console.log('moment date', stDate);
+    // console.log('moment date', stDate);
+    
+    this.newTraining = new Training();
+    this.newTraining.TrainingName= this.trainingFG.value.TrainingName;
+    this.newTraining.StartDate= stDate;
+    this.newTraining.EndDate =enDate;
 
+    console.log("Training add component after:", this.newTraining);  
   }
   //TO ADD Training -- end
 
