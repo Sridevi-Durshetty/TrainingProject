@@ -3,6 +3,7 @@ import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { TrainingService } from './service/training.service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Training } from './model/training';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-training',
@@ -94,5 +95,19 @@ export class TrainingComponent implements OnInit {
       } 
     });
   }
+
+  //TO ADD Training -- start
+  // adding new training by calling api call
+  addNewTraining() {   
+    console.log('this.trainingFG', this.trainingFG.value.DateGroup.StartDate)    
+    
+    const ctrl= this.trainingFG.value.DateGroup
+    const stDate = moment(ctrl.StartDate).format('YYYY/MM/DD');
+   
+
+     console.log('moment date', stDate);
+
+  }
+  //TO ADD Training -- end
 
 }
