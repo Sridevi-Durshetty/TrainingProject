@@ -20,7 +20,6 @@ export class TrainingService {
         return this.http.post<Training>(this.trainingApiURL+'api/training',newTraining)
                     .pipe(catchError(this.ErrorHandling));
   }
-
   
    // handling error when interact with info api
    ErrorHandling(errorResponse:HttpErrorResponse){

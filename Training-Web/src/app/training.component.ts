@@ -14,6 +14,7 @@ export class TrainingComponent implements OnInit {
 
   datePickerConfig: Partial<BsDatepickerConfig>;
   trainingFG: FormGroup;
+  statusMessage: string;
 
   validationMessages = {
     'TrainingName': {
@@ -98,8 +99,8 @@ export class TrainingComponent implements OnInit {
 
   //TO ADD Training -- start
   // adding new training by calling api call
-  addNewTraining() {   
-    console.log('this.trainingFG', this.trainingFG.value.DateGroup.StartDate)    
+  fncAddNewTraining() {   
+    // console.log('this.trainingFG', this.trainingFG.value.DateGroup.StartDate)    
     
     const ctrl= this.trainingFG.value.DateGroup
     const stDate = moment(ctrl.StartDate).format('YYYY/MM/DD');
@@ -113,7 +114,21 @@ export class TrainingComponent implements OnInit {
     this.newTraining.EndDate =enDate;
 
     console.log("Training add component after:", this.newTraining);  
-  }
-  //TO ADD Training -- end
+
+    this.refTrainingService.CreateTraining(this.newTraining)
+                          .subscribe(createRes => {
+                            console.log("added new training response :", createRes);
+                            this.statusMessage = createRes ? "Added successfully" : "Not added";
+                          },
+                            error => {
+                              console.log(error);
+                              this.statusMessage = error.message;
+                            }
+    );
+}
+//TO ADD Training -- end
 
 }
+  
+
+
