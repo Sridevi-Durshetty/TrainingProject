@@ -12,4 +12,5 @@ export class Messages {
     public static STARTDATE_REQUIRED = 'Start Date is Required';
     public static ENDDATE_REQUIRED = 'End Date is Required';
     public static DATECOMPARE_INVALID ='End Date should be greater than Start Date';
+    public static INVALID_DATA = 'Invalid data'
  }

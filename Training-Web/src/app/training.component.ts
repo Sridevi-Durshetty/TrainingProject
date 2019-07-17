@@ -89,12 +89,12 @@ export class TrainingComponent implements OnInit {
           const messages = this.validationMessages[key];
           for (const errorKey in abstractControl.errors) {
             if (errorKey) {  
-              console.log('Key = ' + key + ' && Value = ' + abstractControl.value);             
-              this.formErrors[key] += messages[errorKey] == null ? 'Invalid Data ' : messages[errorKey] + ' ';
+            // console.log('Key = ' + key + ' && Value = ' + abstractControl.value);             
+              this.formErrors[key] += messages[errorKey] == null ? Messages.INVALID_DATA : messages[errorKey];
+            //  console.log('form errror ',this.formErrors); 
             }
           }
-        }
-        console.log('form errror ',this.formErrors); 
+        }        
 
       if (abstractControl instanceof FormGroup) {
         this.logValidationErrors(abstractControl);
