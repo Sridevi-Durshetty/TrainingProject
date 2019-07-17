@@ -4,6 +4,7 @@ import { TrainingService } from './service/training.service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Training } from './model/training';
 import * as moment from 'moment';
+import { DateDiffValidator } from './utils/datediff.validator';
 
 @Component({
   selector: 'app-training',
@@ -65,8 +66,9 @@ export class TrainingComponent implements OnInit {
       DateGroup: this.trainingFB.group({
             StartDate: ['', Validators.required],
             EndDate: ['', [Validators.required]]
-      })
+     },{validator: DateDiffValidator })
     });
+
 
     this.trainingFG.valueChanges.subscribe((data)=>{
       this.logValidationErrors(this.trainingFG)
