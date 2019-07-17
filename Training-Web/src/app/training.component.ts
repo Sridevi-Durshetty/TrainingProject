@@ -27,10 +27,10 @@ export class TrainingComponent implements OnInit {
       'pattern': 'Training Name should be characters'
     },
     'StartDate': {
-      'required': 'Start date is required'
+      'required': Messages.STARTDATE_REQUIRED
     },
     'EndDate': {
-      'required': 'End date is required'
+      'required': Messages.ENDDATE_REQUIRED
     },
     'DateGroup': {
       'dateCompare': 'End Date should be greater than Start Date'

@@ -43,7 +43,7 @@ describe('TrainingComponent', () => {
     jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
   });
 
-  it('should create', () => {
+  it('should create component', () => {
     expect(trainingComp).toBeTruthy();
   });
 
@@ -56,10 +56,12 @@ describe('TrainingComponent', () => {
     expect(trainingComp.trainingFG.valid).toBeFalsy();
   }));
 
-  it(`form should be invalid - training name is null`, async(() => {  
+  it(`form should be invalid - For all required fields`, async(() => {  
      trainingComp.trainingFG.markAllAsTouched();
-    trainingComp.trainingFG.controls['TrainingName'].setValue('');   
-    console.log('training',trainingComp.formErrors.TrainingName )     
-    expect(trainingComp.formErrors.TrainingName.trim()).toEqual(Messages.TRAININGNAME_REQUIRED)
+     trainingComp.trainingFG.controls['TrainingName'].setValue('');  
+     console.log('required field', trainingComp.formErrors)
+     expect(trainingComp.formErrors.TrainingName.trim()).toEqual(Messages.TRAININGNAME_REQUIRED)
+     expect(trainingComp.formErrors.StartDate.trim()).toEqual(Messages.STARTDATE_REQUIRED)
+     expect(trainingComp.formErrors.EndDate.trim()).toEqual(Messages.ENDDATE_REQUIRED)
   }));
 });

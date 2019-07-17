@@ -5,4 +5,6 @@ export class Messages {
     public static DURATION =' Days of Training duration.';
     public static TRAINING_PAGE_TITLE = 'CREATE TRAINING';
     public static TRAININGNAME_REQUIRED = 'Training Name is Required';
+    public static STARTDATE_REQUIRED = 'Start Date is Required';
+    public static ENDDATE_REQUIRED = 'End Date is Required';
  }
