@@ -23,8 +23,8 @@ export class TrainingComponent implements OnInit {
   validationMessages = {
     'TrainingName': {
       'required': Messages.TRAININGNAME_REQUIRED,
-      'minlength': 'Training Name must be more than 3 chars',
-      'pattern': 'Training Name should be characters'
+      'minlength': Messages.TRAININGNAME_MIN_INVALID,
+      'pattern': Messages.TRAININGNAME_PATTERN_INVALID
     },
     'StartDate': {
       'required': Messages.STARTDATE_REQUIRED
@@ -33,7 +33,7 @@ export class TrainingComponent implements OnInit {
       'required': Messages.ENDDATE_REQUIRED
     },
     'DateGroup': {
-      'dateCompare': 'End Date should be greater than Start Date'
+      'dateCompare': Messages.DATECOMPARE_INVALID
     }
   };
 

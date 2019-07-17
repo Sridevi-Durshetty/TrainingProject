@@ -64,4 +64,11 @@ describe('TrainingComponent', () => {
      expect(trainingComp.formErrors.StartDate.trim()).toEqual(Messages.STARTDATE_REQUIRED)
      expect(trainingComp.formErrors.EndDate.trim()).toEqual(Messages.ENDDATE_REQUIRED)
   }));
+
+  it(`form should be invalid - training name min length`, async(() => {  
+    trainingComp.trainingFG.markAllAsTouched();
+    trainingComp.trainingFG.controls['TrainingName'].setValue('ab');  
+    console.log('required field', trainingComp.formErrors)
+    expect(trainingComp.formErrors.TrainingName.trim()).toEqual(Messages.TRAININGNAME_MIN_INVALID)
+ }));
 });
