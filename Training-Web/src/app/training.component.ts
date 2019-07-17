@@ -5,6 +5,8 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Training } from './model/training';
 import * as moment from 'moment';
 import { DateDiffValidator } from './utils/datediff.validator';
+import { Messages } from './utils/messages';
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 
 @Component({
   selector: 'app-training',
@@ -20,13 +22,11 @@ export class TrainingComponent implements OnInit {
   validationMessages = {
     'TrainingName': {
       'required': 'Training Name is required',
-      'minlength': 'information must be more than 3 chars',
+      'minlength': 'Training Name must be more than 3 chars',
       'pattern': 'Training Name should be characters'
     },
     'StartDate': {
-      'required': 'Start date is required',
-      'undefined': 'Invalid date'
-
+      'required': 'Start date is required'
     },
     'EndDate': {
       'required': 'End date is required'
@@ -42,9 +42,11 @@ export class TrainingComponent implements OnInit {
     'EndDate': '',
     'DateGroup': ''
   };
+
   private newTraining: Training
+
   constructor(private refTrainingService: TrainingService,
-    private trainingFB: FormBuilder) {
+              private trainingFB: FormBuilder) {
 
     this.datePickerConfig = Object.assign({},
       {
@@ -56,9 +58,8 @@ export class TrainingComponent implements OnInit {
 
   }
 
+  /* Intializing training form group and assigning validators */ 
   ngOnInit() {
-
-    //created formgroup and formcontrols with validators using formbuilder
     this.trainingFG = this.trainingFB.group({
       TrainingName: ['', [Validators.required, 
                           Validators.minLength(3), 
@@ -76,6 +77,7 @@ export class TrainingComponent implements OnInit {
 
   }
 
+  /*  Looping all Validation messages and storing in formErrors object */
   logValidationErrors(group: FormGroup= this.trainingFG): void {   
     Object.keys(group.controls).forEach((key: string) => {
      
@@ -99,36 +101,28 @@ export class TrainingComponent implements OnInit {
     });
   }
 
-  //TO ADD Training -- start
-  // adding new training by calling api call
-  fncAddNewTraining() {   
-    // console.log('this.trainingFG', this.trainingFG.value.DateGroup.StartDate)    
-    
+  /* Adding new training by changing the dateformat and calling service method */
+  fncAddNewTraining() { 
     const ctrl= this.trainingFG.value.DateGroup
     const stDate = moment(ctrl.StartDate).format('YYYY/MM/DD');
-    const enDate = moment(ctrl.EndDate).format('YYYY/MM/DD');   
-
-    // console.log('moment date', stDate);
+    const enDate = moment(ctrl.EndDate).format('YYYY/MM/DD');     
     
     this.newTraining = new Training();
     this.newTraining.TrainingName= this.trainingFG.value.TrainingName;
     this.newTraining.StartDate= stDate;
-    this.newTraining.EndDate =enDate;
-
-    console.log("Training add component after:", this.newTraining);  
+    this.newTraining.EndDate =enDate; 
 
     this.refTrainingService.CreateTraining(this.newTraining)
                           .subscribe(createRes => {
                             console.log("added new training response :", createRes);
-                            this.statusMessage = createRes ? "Added successfully" : "Not added";
+                            this.statusMessage = createRes ? Messages.SUCCESSFULLY_ADDED + createRes : Messages.UNSUCCESSFULLY_ADDED;
                           },
                             error => {
                               console.log(error);
-                              this.statusMessage = error.message;
+                              this.statusMessage = Messages.COMMON_ERROR_MESSAGE;
                             }
     );
 }
-//TO ADD Training -- end
 
 }
   
