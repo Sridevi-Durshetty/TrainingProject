@@ -14,6 +14,7 @@ describe('TrainingComponent', () => {
   let fixture: ComponentFixture<TrainingComponent>;
   let de: DebugElement;
   let el: HTMLElement;
+  let originalTimeout;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -28,11 +29,18 @@ describe('TrainingComponent', () => {
   }));
 
   beforeEach(() => {
+    originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 50000;
     fixture = TestBed.createComponent(TrainingComponent);
     trainingComp = fixture.componentInstance;
-    de= fixture.debugElement.query(By.css('form'));
+    de = fixture.debugElement.query(By.css('form'));
     el = de.nativeElement;
     fixture.detectChanges();
+    
+  });
+
+  afterEach(function() {
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
   });
 
   it('should create', () => {
@@ -45,8 +53,13 @@ describe('TrainingComponent', () => {
 
   it(`form should be invalid - training name is null`, async(() => {
     trainingComp.trainingFG.controls['TrainingName'].setValue('');  
-    // console.log(trainingComp.trainingFG)  
-    expect(trainingComp.trainingFG.invalid).toBeTruthy();
+    expect(trainingComp.trainingFG.valid).toBeFalsy();
   }));
 
+  it(`form should be invalid - training name is null`, async(() => {  
+     trainingComp.trainingFG.markAllAsTouched();
+    trainingComp.trainingFG.controls['TrainingName'].setValue('');   
+    console.log('training',trainingComp.formErrors.TrainingName )     
+    expect(trainingComp.formErrors.TrainingName.trim()).toEqual(Messages.TRAININGNAME_REQUIRED)
+  }));
 });

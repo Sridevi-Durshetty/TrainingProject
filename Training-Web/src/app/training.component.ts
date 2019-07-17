@@ -22,7 +22,7 @@ export class TrainingComponent implements OnInit {
 
   validationMessages = {
     'TrainingName': {
-      'required': 'Training Name is required',
+      'required': Messages.TRAININGNAME_REQUIRED,
       'minlength': 'Training Name must be more than 3 chars',
       'pattern': 'Training Name should be characters'
     },
