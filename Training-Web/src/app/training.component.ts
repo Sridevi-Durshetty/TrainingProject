@@ -15,6 +15,7 @@ import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 })
 export class TrainingComponent implements OnInit {
 
+  trainingPageTitle = Messages.TRAINING_PAGE_TITLE;
   datePickerConfig: Partial<BsDatepickerConfig>;
   trainingFG: FormGroup;
   statusMessage: string;

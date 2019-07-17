@@ -3,4 +3,5 @@ export class Messages {
     public static UNSUCCESSFULLY_ADDED='Fail to Add.';
     public static COMMON_ERROR_MESSAGE ='Please, check after some time.'
     public static DURATION =' Days of Training duration.';
+    public static TRAINING_PAGE_TITLE = 'CREATE TRAINING';
  }
