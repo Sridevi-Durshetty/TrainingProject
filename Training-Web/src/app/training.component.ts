@@ -115,7 +115,8 @@ export class TrainingComponent implements OnInit {
     this.refTrainingService.CreateTraining(this.newTraining)
                           .subscribe(createRes => {
                             console.log("added new training response :", createRes);
-                            this.statusMessage = createRes ? Messages.SUCCESSFULLY_ADDED + createRes : Messages.UNSUCCESSFULLY_ADDED;
+                            this.statusMessage = createRes ? Messages.SUCCESSFULLY_ADDED +  createRes + Messages.DURATION
+                                                            : Messages.UNSUCCESSFULLY_ADDED;
                           },
                             error => {
                               console.log(error);
