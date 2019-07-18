@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppComponent } from './app.component';
 import { TrainingComponent } from './training.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -11,7 +10,6 @@ import { MomentModule } from 'ngx-moment';
 
 @NgModule({
   declarations: [
-    AppComponent,
     TrainingComponent
   ],
   imports: [
@@ -23,6 +21,6 @@ import { MomentModule } from 'ngx-moment';
     MomentModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [TrainingComponent]
 })
 export class AppModule { }
