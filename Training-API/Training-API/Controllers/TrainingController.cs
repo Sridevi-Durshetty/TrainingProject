@@ -44,11 +44,18 @@ namespace Training_API.Controllers
         [HttpPost]
         public IHttpActionResult AddTraining(Training tr)
         {
-            string noOfDays = objTrainingRepo.InsertTraining(tr);
-            if (noOfDays != "error")
-                return Content(HttpStatusCode.OK, noOfDays);
-            else
-                return Content(HttpStatusCode.BadRequest, ErrorMessageConstants.TrainingNotInserted);
+            try
+            {
+                string noOfDays = objTrainingRepo.InsertTraining(tr);
+                if (noOfDays != "error")
+                    return Content(HttpStatusCode.OK, noOfDays);
+                else
+                    return Content(HttpStatusCode.BadRequest, ErrorMessageConstants.TrainingNotInserted);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
